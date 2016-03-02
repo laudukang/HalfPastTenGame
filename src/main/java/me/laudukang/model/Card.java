@@ -9,7 +9,7 @@ package me.laudukang.model;
  */
 public class Card {
     String suit;
-    int number;
+    String number;
     float point;
 
     public String getSuit() {
@@ -20,11 +20,11 @@ public class Card {
         this.suit = suit;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -34,5 +34,10 @@ public class Card {
 
     public void setPoint(float point) {
         this.point = point;
+    }
+
+    @Override
+    public String toString() {
+        return "Suit:" + suit + " Number:" + number + " Point:" + point;
     }
 }
