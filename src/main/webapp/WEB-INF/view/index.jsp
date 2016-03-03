@@ -99,7 +99,7 @@
             倘若庄家没有爆煲，跟闲家比点数。倘若点数相同，庄家胜，称“食夹棍”<br/>
         </p>
     </div>
-    <form class="footer" action="${ home }/game">
+    <form class="footer" action="${ home }game">
         请选择玩家人数:
         <select name="number">
             <option value="1">2</option>

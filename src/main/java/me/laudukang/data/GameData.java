@@ -15,6 +15,7 @@ import java.util.Random;
  * <p>Version: 1.0
  */
 public class GameData {
+    //限制每位玩家最大牌数
     public final static int MAX_CARD = 7;
     public final static int CARD_NUM = 52;
     Card[] card;
@@ -99,6 +100,7 @@ public class GameData {
         cardIndex = 0;
     }
 
+    //庄家获牌
     public Card computerGetOneCard() {
         Card temp = card[cardIndex++];
         computerCard[computerCardCount++] = temp;
@@ -106,6 +108,7 @@ public class GameData {
         return temp;
     }
 
+    //玩家获牌
     public Card userGetOneCard(int userid) {
         Card temp = card[cardIndex++];
         userCard.get(String.valueOf(userid))[userCardCount[userid]++] = temp;
@@ -113,7 +116,7 @@ public class GameData {
         return temp;
     }
 
-
+    //后台显示当前玩家牌
     public void showCard(Card[] card, String msg) {
         System.out.println(msg);
         if (card.length > 0) {

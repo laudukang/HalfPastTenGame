@@ -44,7 +44,7 @@ public class MvcConfig extends WebMvcConfigurationSupport {
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
         registry.addResourceHandler("/img/**").addResourceLocations("/img/");
-        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
+        registry.addResourceHandler("/font/**").addResourceLocations("/font/");
     }
 
     /**

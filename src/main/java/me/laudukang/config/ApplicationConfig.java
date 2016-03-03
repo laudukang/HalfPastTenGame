@@ -12,9 +12,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 //@EnableWebMvc
-//@ComponentScan(basePackages = "me.laudukang.controller", excludeFilters = {
-//        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Controller.class})
-//})
 @ComponentScan(basePackages = {"me.laudukang.config", "me.laudukang.service"})
 public class ApplicationConfig {
 }

@@ -3,6 +3,7 @@ package me.laudukang.service.impl;
 import me.laudukang.data.GameData;
 import me.laudukang.model.Card;
 import me.laudukang.service.IHPTGService;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,16 +19,19 @@ import java.util.Set;
  * <p>Version: 1.0
  */
 @Service
+@Scope("session")
 public class HPTGService implements IHPTGService {
 
     private GameData gameData;
 
+    //重置牌
     @Override
     public void resetCard(int userCount) {
         gameData = null;
         gameData = new GameData(userCount);
     }
 
+    //10加J或Q或K？
     @Override
     public boolean hasTenWithJQK(Card[] card) {
         Set set = new HashSet<>(card.length);
@@ -39,12 +43,13 @@ public class HPTGService implements IHPTGService {
         return set.contains("10") && (set.contains("J") || set.contains("Q") || set.contains("K"));
     }
 
-
+    //庄家获牌
     @Override
     public Card computerGetOneCard() {
         return gameData.computerGetOneCard();
     }
 
+    //玩家获牌
     @Override
     public Card userGetOneCard(int userid) {
         return gameData.userGetOneCard(userid);
@@ -61,16 +66,19 @@ public class HPTGService implements IHPTGService {
     //    return result;
     //}
 
+    //庄家牌点数
     @Override
     public float getComputerCurrentPonit() {
         return gameData.getComputerResult();
     }
 
+    //玩家牌点数
     @Override
     public float getUserCurrentPonit(int userid) {
         return gameData.getUserResult()[userid];
     }
 
+    //玩家能否继续拿牌
     @Override
     public Map<String, Object> checkBeforeGetCardUser(int userid) {
         Map<String, Object> map = new HashMap<>(2);
@@ -92,6 +100,7 @@ public class HPTGService implements IHPTGService {
         return map;
     }
 
+    //庄家能否继续拿牌
     @Override
     public Map<String, Object> checkBeforeGetCardComputer() {
         Map<String, Object> map = new HashMap<>(2);
@@ -109,6 +118,7 @@ public class HPTGService implements IHPTGService {
         return map;
     }
 
+    //获取当前局游戏结果
     @Override
     public Map<String, Object> whoWinTheGame(int userCount) {
         Map<String, Object> map = new HashMap<>();
@@ -116,7 +126,7 @@ public class HPTGService implements IHPTGService {
         //map.put("c", gameData.getComputerCard());
         for (int i = 0; i < userCount; i++) {
             if (gameData.getUserCardCount()[i] > 4) {//“五龙”
-                map.put("u" + i, "您胜出");
+                map.put("u" + i, "五龙，您胜出");
                 map.put("au" + i, "对【玩家" + (i + 1) + "】，您输了");
             } else {
                 float userResult = gameData.getUserResult()[i];

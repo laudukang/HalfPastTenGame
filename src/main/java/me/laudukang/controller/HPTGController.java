@@ -1,7 +1,8 @@
 package me.laudukang.controller;
 
-import me.laudukang.service.IHPTGService;
+import me.laudukang.service.impl.HPTGService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,14 @@ import java.util.Map;
  * <p>Version: 1.0
  */
 @Controller
+@Scope("session")
 public class HPTGController {
+    //限制最大玩家数
     final static int MAX_USER = 2;
+
     @Autowired
-    private IHPTGService hptgService;
+    private HPTGService hptgService;
+
     private int currentUserCount;
 
     @RequestMapping("hi")
@@ -31,7 +36,7 @@ public class HPTGController {
     public Map<String, String> hi() {
         System.out.println("hi laudukang");
         Map<String, String> map = new HashMap<String, String>();
-        map.put("msg", "hi lau");
+        map.put("msg", "hi laudukang");
         return map;
     }
 
@@ -50,6 +55,7 @@ public class HPTGController {
                     throw new Exception("用户数过多");
                 }
                 model.addAttribute("userCount", userCount + 1);
+                //System.out.println("hptgService=" + hptgService.hashCode());
                 currentUserCount = userCount;
                 hptgService.resetCard(userCount);
             } catch (Exception ex) {
@@ -76,6 +82,7 @@ public class HPTGController {
                     map.put("totalPoint", hptgService.getUserCurrentPonit(userid));
                 }
             } catch (Exception ex) {
+                System.out.println(ex.getMessage());
                 map = new HashMap<>(2);
                 map.put("msg", "参数非法");
                 map.put("isGet", false);
@@ -105,5 +112,4 @@ public class HPTGController {
     public Map<String, Object> whoWinTheGame() {
         return hptgService.whoWinTheGame(currentUserCount);
     }
-
 }
