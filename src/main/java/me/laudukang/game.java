@@ -73,7 +73,6 @@ public class game {
         int[] userCardCount;//= new int[];
 
         Card[] computerCard = new Card[MAX_CARD];
-        // Card[][] userCard ;//= new Card[2][MAX_CARD];
 
         Map<String, Card[]> userCard;
 

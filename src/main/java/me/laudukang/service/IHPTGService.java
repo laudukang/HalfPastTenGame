@@ -12,27 +12,22 @@ import java.util.Map;
  * <p>Version: 1.0
  */
 public interface IHPTGService {
-    void initCard();
+    void resetCard(int userCount);
 
     boolean hasTenWithJQK(Card[] card);
 
-    float getCurrentPonit(Card[] card);
+    float getComputerCurrentPonit();
 
-    void showCard(Card[] card, String msg);
-
-    void shuffle(Card[] card);
+    float getUserCurrentPonit(int userid);
 
     Card computerGetOneCard();
 
     Card userGetOneCard(int userid);
 
-    void initSpace(int userCount);
+    Map<String, Object> checkBeforeGetCardUser(int userid);
 
-    Map<String, String> checkBeforeGetCardUser(int userid);
-
-    Map<String, String> checkBeforeGetCardComputer();
+    Map<String, Object> checkBeforeGetCardComputer();
 
     Map<String, Object> whoWinTheGame(int userCount);
-
 
 }
