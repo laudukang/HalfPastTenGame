@@ -45,7 +45,7 @@ public class HPTGController {
         return "index";
     }
 
-    @RequestMapping(value = "/game", method = RequestMethod.GET)
+    @RequestMapping(value = "game", method = RequestMethod.GET)
     public String gamePage(HttpServletRequest request, Model model) {
         int userCount = 0;
         if (null != request.getParameter("number")) {
@@ -68,7 +68,7 @@ public class HPTGController {
         return "game";
     }
 
-    @RequestMapping(value = "/userGetCard")
+    @RequestMapping(value = "userGetCard")
     @ResponseBody
     public Map<String, Object> userGetCard(HttpServletRequest request) {
         Map<String, Object> map = null;
@@ -95,7 +95,7 @@ public class HPTGController {
         return map;
     }
 
-    @RequestMapping(value = "/computerGetCard")
+    @RequestMapping(value = "computerGetCard")
     @ResponseBody
     public Map<String, Object> computerGetCard(HttpServletRequest request) {
         Map<String, Object> map = null;
@@ -107,9 +107,15 @@ public class HPTGController {
         return map;
     }
 
-    @RequestMapping(value = "/winner", method = RequestMethod.GET)
+    @RequestMapping(value = "winner", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> whoWinTheGame() {
         return hptgService.whoWinTheGame(currentUserCount);
     }
+
+    //@ExceptionHandler(NoHandlerFoundException.class)
+    //public String handle(Exception ex) {
+    //    System.out.println("404");
+    //    return "404";
+    //}
 }

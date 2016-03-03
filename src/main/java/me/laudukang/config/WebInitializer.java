@@ -33,6 +33,8 @@ public class WebInitializer implements WebApplicationInitializer {
         springMvcContext.register(MvcConfig.class);
         //3、DispatcherServlet
         DispatcherServlet dispatcherServlet = new DispatcherServlet(springMvcContext);
+        dispatcherServlet
+                .setThrowExceptionIfNoHandlerFound(true);
 
         ServletRegistration.Dynamic dynamic = sc.addServlet("dispatcherServlet", dispatcherServlet);
         dynamic.setLoadOnStartup(1);
@@ -46,4 +48,5 @@ public class WebInitializer implements WebApplicationInitializer {
         filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/");
 
     }
+
 }
