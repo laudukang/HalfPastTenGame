@@ -125,7 +125,7 @@ public class HPTGService implements IHPTGService {
         //返回庄家所有牌
         //map.put("c", gameData.getComputerCard());
         for (int i = 0; i < userCount; i++) {
-            if (gameData.getUserCardCount()[i] > 4) {//“五龙”
+            if (gameData.getUserResult()[i] <= 10.5 && gameData.getUserCardCount()[i] > 4) {//“五龙”
                 map.put("u" + i, "五龙，您胜出");
                 map.put("au" + i, "对【玩家" + (i + 1) + "】，您输了");
             } else {
