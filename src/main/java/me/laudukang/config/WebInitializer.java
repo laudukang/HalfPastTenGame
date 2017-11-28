@@ -28,24 +28,25 @@ public class WebInitializer implements WebApplicationInitializer {
         //rootContext.scan("me.laudukang.spring.config");
         sc.addListener(new ContextLoaderListener(rootContext));
 
-        //2、springmvc上下文
+        //CharacterEncodingFilter
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("utf-8");
+        characterEncodingFilter.setForceEncoding(true);
+        FilterRegistration filterRegistration =
+                sc.addFilter("characterEncodingFilter", characterEncodingFilter);
+        filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
+
+        //springmvc上下文
         AnnotationConfigWebApplicationContext springMvcContext = new AnnotationConfigWebApplicationContext();
         springMvcContext.register(MvcConfig.class);
-        //3、DispatcherServlet
+        
+        //DispatcherServlet
         DispatcherServlet dispatcherServlet = new DispatcherServlet(springMvcContext);
         dispatcherServlet
                 .setThrowExceptionIfNoHandlerFound(true);
-
         ServletRegistration.Dynamic dynamic = sc.addServlet("dispatcherServlet", dispatcherServlet);
         dynamic.setLoadOnStartup(1);
         dynamic.addMapping("/");
-
-        //4、CharacterEncodingFilter
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("utf-8");
-        FilterRegistration filterRegistration =
-                sc.addFilter("characterEncodingFilter", characterEncodingFilter);
-        filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/");
 
     }
 

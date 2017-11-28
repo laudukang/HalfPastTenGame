@@ -17,7 +17,7 @@ import java.util.Random;
 public class GameData {
     //限制每位玩家最大牌数
     public final static int MAX_CARD = 7;
-    public final static int CARD_NUM = 52;
+    public final static int CARD_NUM = 52 * 2;
     Card[] card;
 
     int computerCardCount = 0;
@@ -38,38 +38,42 @@ public class GameData {
     public GameData(int userCount) {
         card = new Card[CARD_NUM];
         String suit = null;
-        for (int i = 0, j = 0; i < card.length; i++) {
-            if (i % 13 == 0) {
-                suit = Suits.values()[j++].toString();
+        for (int m = 0; m < 2; m++) {
+            for (int i = 0, j = 0; i < card.length; i++) {
+                if (i % 13 == 0) {
+                    suit = Suits.values()[j++].toString();
+                }
+                Card card1 = new Card();
+                card1.setSuit(suit);
+                int tmp = i % 13;
+                switch (tmp) {
+                    case 0:
+                        card1.setNumber("A");
+                        break;
+                    case 9:
+                        card1.setNumber("10");
+                        break;
+                    case 10:
+                        card1.setNumber("J");
+                        break;
+                    case 11:
+                        card1.setNumber("Q");
+                        break;
+                    case 12:
+                        card1.setNumber("K");
+                        break;
+                    default:
+                        card1.setNumber(String.valueOf(tmp + 1));
+                }
+                if (tmp > 9) {
+                    card1.setPoint((float) 0.5);
+                } else {
+                    card1.setPoint(tmp + 1);
+                }
+                card[i] = card1;
+                j = 0;
             }
-            Card card1 = new Card();
-            card1.setSuit(suit);
-            int tmp = i % 13;
-            switch (tmp) {
-                case 0:
-                    card1.setNumber("A");
-                    break;
-                case 9:
-                    card1.setNumber("10");
-                    break;
-                case 10:
-                    card1.setNumber("J");
-                    break;
-                case 11:
-                    card1.setNumber("Q");
-                    break;
-                case 12:
-                    card1.setNumber("K");
-                    break;
-                default:
-                    card1.setNumber(String.valueOf(tmp + 1));
-            }
-            if (tmp > 9) {
-                card1.setPoint((float) 0.5);
-            } else {
-                card1.setPoint(tmp + 1);
-            }
-            card[i] = card1;
+
         }
         //初始化牌结果
         //showCard(card,"初始化牌结果");

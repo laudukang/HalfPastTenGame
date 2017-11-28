@@ -1,6 +1,9 @@
 package me.laudukang.dev;
 
-import me.laudukang.util.Suits;
+import me.laudukang.service.IHPTGService;
+import me.laudukang.service.impl.HPTGService;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -12,8 +15,32 @@ import org.junit.Test;
  */
 public class HPTGTest {
 
+    @Before
+    public void init(){
+
+    }
+
     @Test
     public void test() {
-        System.out.println(Suits.CLUBS);
+
+        IHPTGService ihptgService = new HPTGService();
+        ihptgService.resetCard(1);
+
+        float userPoint = 0, computerPoint = 0;
+
+        userPoint += ihptgService.userGetOneCard(0).getPoint();
+
+        userPoint += ihptgService.userGetOneCard(0).getPoint();
+        Assert.assertTrue("", userPoint > 10.5);
+
+        userPoint += ihptgService.userGetOneCard(0).getPoint();
+        Assert.assertTrue("", userPoint > 10.5);
+
+
+        computerPoint += ihptgService.computerGetOneCard().getPoint();
+        computerPoint += ihptgService.computerGetOneCard().getPoint();
+        Assert.assertTrue("", computerPoint > 10.5);
+
+
     }
 }
