@@ -213,7 +213,7 @@
 </c:if>
 <c:if test="${ msg == null }">
     <div class="header">
-        <a href="https://github.com/laudukang/HalfPastTenGame" target="_blank" class="github">Github</a>
+        <a href="https://github.com/laudukang/half-past-ten-game" target="_blank" class="github">Github</a>
         <h1 id="title" class="title">玩家1回合</h1>
         <a class="btn restart" href="/">重新开始</a>
     </div>
